@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "ESNext",
+		"target": "ES2016",
+		"sourceMap": true,
+		"declaration": true, // 生成定义文件
+		"declarationMap": false, // 生成定义sourceMap
+		"declarationDir": "./types", // 定义文件输出目录
+		"downlevelIteration": true, // 允许使用...展开Set
+		"baseUrl": ".",
+		"outDir": "./dist",
+		"lib": [
+			"ESNext",
+			"dom"
+		]
+	},
+	"exclude": [
+		"node_modules"
+	],
+	"include": ["src/*"]
+}
