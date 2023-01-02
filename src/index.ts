@@ -28,7 +28,6 @@ instance.install = function (Vue:VueConstructor) {
 				decodeInfo,
 				params: options
 			})
-			console.log(autoplay.toString(), 'false', autoplay.toString() !== 'false');
 			if (autoplay.toString() !== 'false') {
 				enter.play();
 			}
