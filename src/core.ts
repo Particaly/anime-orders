@@ -80,8 +80,27 @@ export class Core {
 		return animation;
 	}
 
-	createLeaveAnimation(option: AnimeOptions): any {
-
+	createLeaveAnimation(option: AnimeOptions, max: number): any {
+		const {params, el, decodeInfo} = option;
+		const {group, delay, easing, duration} = decodeInfo;
+		const durationValue = duration ? duration : params.leave.duration;
+		const animeOption = {
+			targets: [el],
+			...params.leave,
+			delay: max - delay,
+			duration: durationValue,
+			autoplay: false,
+		}
+		this.assignTimeFunction(animeOption, easing)
+		
+		const animation = anime(animeOption)
+		
+		this.animeGroup[group].leave.push({
+			animation,
+			option,
+		});
+		
+		return animation
 	}
 
 	/**
@@ -137,30 +156,20 @@ export class Core {
 		})
 		const tasks = resource.enter.map(source => {
 			const {option} = source;
-			const {params, el, decodeInfo} = option;
-			const {group, delay, easing, duration} = decodeInfo;
-			const durationValue = duration ? duration : params.leave.duration;
-			console.log('leave', max, delay, max - delay);
-			const animeOption = {
-				targets: [el],
-				...params.leave,
-				delay: max - delay,
-				duration: durationValue,
-				autoplay: false,
-			}
-			this.assignTimeFunction(animeOption, easing)
-
-			const animation = anime(animeOption)
-
-			this.animeGroup[group].leave.push({
-				animation,
-				option,
-			});
+			const animation = this.createLeaveAnimation(option, max);
 
 			animation.play();
 			return animation.finished
 		})
 		await Promise.allSettled(tasks)
+	}
+	
+	async dispose(group) {
+		await this.dispatchLeave(group)
+		const resource = this.animeGroup[group];
+		if (!resource) {
+			return false
+		}
 		this.animeGroup[group] = undefined;
 	}
 
