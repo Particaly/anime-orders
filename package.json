@@ -1,16 +1,19 @@
 {
 	"name": "@jspatrick/anime-orders",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "tsc && yalc publish"
+		"build": "tsc && npm run build:umd",
+		"build:umd": "vite build"
 	},
 	"peerDependencies": {
 		"animejs": "^3.2.1"
 	},
 	"devDependencies": {
+		"@types/node": "^18.11.18",
 		"animejs": "^3.2.1",
 		"typescript": "^4.9.4",
+		"vite": "^4.0.3",
 		"vue": "^2.7.14"
 	},
 	"license": "MIT"

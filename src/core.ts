@@ -31,6 +31,7 @@ export class Core {
 		autoplay: false,
 	}
 	install: (Vue: VueConstructor) => void;
+	directive: { inserted(el, binding): boolean };
 
 	private assignTimeFunction (option, easing) {
 		const timeFunction = this.easing.find(which => which.name === easing);
