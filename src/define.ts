@@ -51,7 +51,7 @@ export default function (instance) {
 			autoplay: false
 		},
 		leave: {
-			translateX: [0, -100],
+			translateY: [0, -100],
 			opacity: [1, 0],
 			duration: 300,
 			autoplay: false
